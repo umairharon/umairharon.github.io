@@ -1,1 +1,1 @@
-# MohammadUsman0.github.io
+This is the source code to Ahmad AlMughrabi's public academic website: https://amughrabi.github.io. Feel free to clone this code for your own personal use.
