@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodMem Experiments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" media="all" />
+    <link href="portrait.css" rel="stylesheet" media="(orientation:portrait)" />
+    <link href="print.css" rel="stylesheet" media="print" />
+    <style>
+        .gif-container {
+            text-align: center;
+        }
+        .gif-container img {
+            width: 100%;
+        }
+        .abstract {
+            text-align: justify;
+        }
+        .github-logo {
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .github-logo img {
+            width: 60px;
+            height: auto;
+        }
+        .github-text {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+        .citation {
+            text-align: justify;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .author-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .author-item {
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 text-center mb-2">
+                <h1 class="mb-4">VolE: A Point-cloud Framework for Food 3D Reconstruction and Volume Estimation</h1>
+                <div class="col-md-12 text-center">
+                <ul class="list-inline author-list">
+                    <li class="list-inline-item author-item">
+                        <a href="https://umairharon.github.io/">
+                            Umair Haroon
+                        </a>
+                        <br>Universitat de Barcelona
+                    </li>
+                    <li class="list-inline-item author-item">
+                        <a href="https://amughrabi.github.io/">
+                            Ahmad AlMughrabi
+                        </a>
+                        <br>Universitat de Barcelona
+                    </li>
+                    <li class="list-inline-item author-item">
+                        <a href="https://ricjm.github.io/">
+                            Ricardo Marques
+                        </a>
+                        <br>Universitat de Barcelona
+                    </li>
+                    <li class="list-inline-item author-item">
+                        <a href="http://www.ub.edu/cvub/petiaradeva/">
+                            Petia Radeva
+                        </a>
+                        <br>Universitat de Barcelona
+                    </li>
+                </ul>
+            </div>
+                <!-- <p class="lead mb-4">This webpage shows all the experiments we realized for FoodMem's validation. We recommend zooming in to avoid webpage lag due to the amount of gifs.</p> -->
+                <div class="icon-container" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                    <div class="article">
+                        <a href="https://arxiv.org/pdf/2505.10205" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
+                            <img src="imgs/paper.png" alt="Paper" style="width:60px;height:60px;">
+                            <span>Paper</span>
+                        </a>
+                    </div>
+                    <div class="github" style="display: flex; flex-direction: column; align-items: center;">
+                        <a href="#" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
+                            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width:60px;height:60px;">
+                            <span>Code</span>
+                        </a>
+                    </div>
+
+                    <div class="download-data" style="display: flex; flex-direction: column; align-items: center;">
+                        <a href="#" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
+                            <img src="imgs/dataset.png" alt="Data Download Icon" style="width:60px;height:60px;">
+                            <span style="text-align: center;">FoodKit Dataset</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center" style="font-size: 14px;">
+            <div class="row">
+                <!-- Ground Truth -->
+                <div class="col-md-4">
+                    <img src="figs/Figure_1_GT.png" alt="Ground Truth" class="img-fluid" />
+                    <div style="text-align: center;">
+                        <strong>(a) GT</strong><br>
+                        Volume = 173.13 cm³
+                    </div>
+                </div>
+
+                <!-- VolETA -->
+                <div class="col-md-4">
+                    <img src="figs/Figure_1_SOTA.png" alt="VolETA" class="img-fluid" />
+                    <div style="text-align: center;">
+                        <strong>(b) VolETA </strong><br>
+                        EP = 7.79%, CD = 0.0030
+                    </div>
+                </div>
+
+                <!-- Ours -->
+                <div class="col-md-4">
+                    <img src="figs/Figure_1_Our.png" alt="Ours" class="img-fluid" />
+                    <div style="text-align: center;">
+                        <strong>(c) Ours</strong><br>
+                        EP = 1.91%, CD = 0.0012
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <p style="font-size: 13px; text-align: center;">
+                        Comparison of 3D reconstruction and volume estimation for the <em>Cake</em> scene (MTF dataset):
+                        (a) Ground truth (GT) 3D model with a volume of 173.13 cm³.
+                        (b) The VolETA<sup>[1]</sup> reconstruction shows a volume of 186.62 cm³, with a volume error percentage (EP) of 7.79% and a Chamfer distance (CD) of 0.0030.
+                        (c) In comparison, our VolE framework achieves a volume of 176.43 cm³, with a lower EP of 1.91% and a CD of 0.0012, demonstrating enhanced accuracy and geometric fidelity.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 text-center mb-2">
+                <div class="abstract">
+                    <h2 style="text-align: center;">Abstract</h2>
+                    <p>Accurate food volume estimation is crucial for medical nutrition management and health monitoring applications, but current food volume estimation methods are often limited by mononuclear data, leveraging single-purpose hardware such as 3D scanners, gathering sensor-oriented information such as depth information, or relying on camera calibration using a reference object. In this paper, we present VolE, a novel framework that leverages mobile device-driven 3D reconstruction to estimate food volume. VolE captures images and camera locations in free motion to generate precise 3D models, thanks to AR-capable mobile devices. To achieve real-world measurement, VolE is a reference- and depth-free framework that leverages food video segmentation for food mask generation. We also introduce a new food dataset encompassing the challenging scenarios absent in the previous benchmarks. Our experiments demonstrate that VolE outperforms the existing volume estimation techniques across multiple datasets by achieving 2.22% MAPE, highlighting its superior performance in food volume estimation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid text-center" style="margin-top: 20px;">
+            <img src="figs/VolE_Framework_v6.jpg" alt="VolE Framework Overview" style="width: 100%; max-width: 100%; height: auto;" />
+
+            <p style="font-size: 14px; text-align: center; margin-top: 10px;">
+                Overview of the VolE framework, illustrating its four key stages:
+                <strong>(a) Data Acquisition</strong> which utilizes <strong>ARCore/ARKit</strong> to generate initial images
+                (<span style="color: red;">𝓘</span>) and 3D coordinates per image (<span style="color: red;">𝓒</span>);
+                <strong>(b) Parameters Extraction</strong> processing <strong>Structure from Motion</strong> including Feature Extraction
+                (<span style="color: red;">𝐅<sub>i</sub></span>), Feature Matching (<span style="color: red;">𝐌<sub>ab</sub></span>) and
+                Geometric Verification (<span style="color: red;">𝐆<sub>ab</sub></span>), alongside it also includes
+                <strong>FoodMem</strong> to segment the object of interest from RGB images and provide Segmented Masks
+                (<span style="color: red;">𝓢</span>); <strong>(c) 3D Mesh Reconstruction</strong> integrating point cloud masking
+                (<span style="color: red;">𝓟</span>), Mesh Reconstruction (<span style="color: red;">𝓜</span>) and Mesh Refinement
+                (<span style="color: red;">𝓜̂</span>) for detailed 3D representation; <strong>(d) Volume Estimation</strong>, where the
+                object's volume is calculated from the refined mesh.
+            </p>
+        </div>
+
+        <hr style="border-top: 2px dashed #ccc; margin: 40px 0;">
+
+        <h3 style="text-align: center; margin-bottom: 20px;">FoodKit Dataset Comparison</h3>
+
+        <div class="container-fluid text-center">
+            <div class="row justify-content-center">
+                <!-- Each item block -->
+                <div class="col-6 col-sm-3 col-md-2 mb-4" style="text-align: center;">
+                    <img src="figs/VolE_Results_apple01.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_apple00.png" style="width: 45%;">
+                    <div><small>Apple</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Orange00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Orange01.png" style="width: 45%;">
+                    <div><small>Orange</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Aguacate00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Aguacate01.png" style="width: 45%;">
+                    <div><small>Aguacate</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Lemon00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Lemon01.png" style="width: 45%;">
+                    <div><small>Lemon</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Donut00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Donut01.png" style="width: 45%;">
+                    <div><small>Donut</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Durum00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Durum01.png" style="width: 45%;">
+                    <div><small>Durum</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Pear00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Pear01.png" style="width: 45%;">
+                    <div><small>Pear</small></div>
+                </div>
+
+                <!-- Continue with the rest of the items -->
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Samosa00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Samosa01.png" style="width: 45%;">
+                    <div><small>Samosa</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Apple_Pie00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Apple_Pie01.png" style="width: 45%;">
+                    <div><small>Apple Pie</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Empanadilla00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Empanadilla01.png" style="width: 45%;">
+                    <div><small>Empanadilla</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Falafel00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Falafel01.png" style="width: 45%;">
+                    <div><small>Falafel</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_napolitanas00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_napolitanas01.png" style="width: 45%;">
+                    <div><small>Napolitanas</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_capsicum00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_capsicum01.png" style="width: 45%;">
+                    <div><small>Capsicum</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Banana00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Banana01.png" style="width: 45%;">
+                    <div><small>Banana</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Paxoco_mini00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Paxoco_mini01.png" style="width: 45%;">
+                    <div><small>Paxoco Mini</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_chocolate_cake00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_chocolate_cake01.png" style="width: 45%;">
+                    <div><small>Chocolate Cake</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_chocolate_croissant00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_chocolate_croissant01.png" style="width: 45%;">
+                    <div><small>Chocolate Croissant</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Chocolate_bomb00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Chocolate_bomb01.png" style="width: 45%;">
+                    <div><small>Chocolate Bomb</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Chocolate_Panettone00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Chocolate_Panettone01.png" style="width: 45%;">
+                    <div><small>Chocolate Panettone</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_French_Bread00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_French_Bread01.png" style="width: 45%;">
+                    <div><small>French Bread</small></div>
+                </div>
+                <div class="col-6 col-sm-3 col-md-2 mb-4">
+                    <img src="figs/VolE_Results_Yellow_Cane00.png" style="width: 45%;">
+                    <img src="figs/VolE_Results_Yellow_Cane01.png" style="width: 45%;">
+                    <div><small>Yellow Cane</small></div>
+                </div>
+            </div>
+
+            <p style="font-size: 14px; margin-top: 10px;">Visual representation of our framework results on the FoodKit dataset. Each food item is displayed with a textured mesh on the left and a shaded mesh on the right, emphasizing our framework's ability to accurately capture the 3D shape, texture, and structural details of various food items.</p>
+        </div>
+
+        <hr style="border-top: 2px dashed #ccc; margin: 40px 0;">
+
+        <h3 style="text-align: center; margin-bottom: 20px;">MTF Dataset Comparison</h3>
+
+        <div class="container-fluid text-center">
+            <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+                    <th>8</th><th>9</th><th>10</th><th>11</th><th>13</th><th>14</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>GT</strong></td>
+                    <td><img src="figs/MTF_Results_GT_1.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_2.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_3.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_4.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_5.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_6.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_7.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_8.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_9.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_10.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_11.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_13.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_GT_14.png" width="100%"></td>
+                </tr>
+                <tr>
+                    <td><strong>VolETA</strong></td>
+                    <td><img src="figs/MTF_Results_SOTA_1.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_2.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_3.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_4.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_5.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_6.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_7.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_8.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_9.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_10.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_11.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_13.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_SOTA_14.png" width="100%"></td>
+                </tr>
+                <tr>
+                    <td><strong>Ours</strong></td>
+                    <td><img src="figs/MTF_Results_VolE_1.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_2.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_3.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_4.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_5.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_6.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_7.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_8.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_9.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_10.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_11.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_13.png" width="100%"></td>
+                    <td><img src="figs/MTF_Results_VolE_14.png" width="100%"></td>
+                </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 14px; margin-top: 10px;">
+                Our framework 3D reconstruction visual results on the MTF dataset in comparison with VolETA and ground truth (GT).
+            </p>
+        </div>
+
+        <hr style="border-top: 2px dashed #ccc; margin: 40px 0;">
+
+
+
+        <h3 style="text-align: center; margin-bottom: 20px;">DTU Dataset Comparison</h3>
+
+        <div class="container-fluid text-center">
+            <div class="row">
+                <div class="col-12">
+                    <p><strong>NeuS2</strong></p>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <img src="figs/Figure_7_40_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_55_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_63_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_83_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_97_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_110_Neus.png" class="m-1" style="width: 13%;">
+                        <img src="figs/Figure_7_114_Neus.png" class="m-1" style="width: 13%;">
+                    </div>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <p><strong>Ours</strong></p>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_40_VolE.png" style="width: 100%;">
+                            <small>Scan 40</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_55_VolE.png" style="width: 100%;">
+                            <small>Scan 55</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_63_VolE.png" style="width: 100%;">
+                            <small>Scan 63</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_83_VolE.png" style="width: 100%;">
+                            <small>Scan 83</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_97_VolE.png" style="width: 100%;">
+                            <small>Scan 97</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_110_VolE.png" style="width: 100%;">
+                            <small>Scan 110</small>
+                        </div>
+                        <div class="text-center m-1" style="width: 13%;">
+                            <img src="figs/Figure_7_114_VolE.png" style="width: 100%;">
+                            <small>Scan 114</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-size: 14px; margin-top: 10px;">
+                Qualitative comparison of our framework in comparison with NeuS2 on the DTU dataset.
+            </p>
+        </div>
+
+        <hr style="border-top: 2px dashed #ccc; margin: 40px 0;">
+
+
+        <h2>Citation</h2>
+            <p>If you want to cite our work, please use this:</p>
+            <div class="citation">
+                <pre>
+                  @article{haroon2025vole,
+                      title={VolE: A Point-cloud Framework for Food 3D Reconstruction and Volume Estimation},
+                      author={Haroon, Umair and AlMughrabi, Ahmad and Zoumpekas, Thanasis and Marques, Ricardo and Radeva, Petia},
+                      journal={arXiv preprint arXiv:2505.10205},
+                      year={2025}
+                    }
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+                $('#sotaButton').click(function() {
+                    $('#sotaContent').show();
+                    $('#ablationContent').hide();
+                });
+                $('#ablationButton').click(function() {
+                    $('#sotaContent').hide();
+                    $('#ablationContent').show();
+                });
+
+                let showMore = false;
+                $('#seeMoreButton').click(function() {
+                    if (showMore) {
+                        $('#sotaGifs2, #ablationGifs2').hide();
+                        $(this).text('See more');
+                    } else {
+                        $('#sotaGifs2, #ablationGifs2').show();
+                        $(this).text('See less');
+                    }
+                    showMore = !showMore;
+                });
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                const lazyImages = document.querySelectorAll('img.lazy');
+
+                if ('IntersectionObserver' in window) {
+                    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                let lazyImage = entry.target;
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove('lazy');
+                                lazyImageObserver.unobserve(lazyImage);
+                            }
+                        });
+                    });
+
+                    lazyImages.forEach(function(lazyImage) {
+                        lazyImageObserver.observe(lazyImage);
+                    });
+                } else {
+                    // Fallback for browsers without IntersectionObserver support
+                    let lazyLoadThrottleTimeout;
+                    function lazyLoad() {
+                        if (lazyLoadThrottleTimeout) {
+                            clearTimeout(lazyLoadThrottleTimeout);
+                        }
+
+                        lazyLoadThrottleTimeout = setTimeout(function() {
+                            let scrollTop = window.pageYOffset;
+                            lazyImages.forEach(function(lazyImage) {
+                                if (lazyImage.offsetTop < (window.innerHeight + scrollTop)) {
+                                    lazyImage.src = lazyImage.dataset.src;
+                                    lazyImage.classList.remove('lazy');
+                                }
+                            });
+                            if (lazyImages.length == 0) { 
+                                document.removeEventListener("scroll", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                window.removeEventListener("orientationchange", lazyLoad);
+                            }
+                        }, 20);
+                    }
+
+                    document.addEventListener("scroll", lazyLoad);
+                    window.addEventListener("resize", lazyLoad);
+                    window.addEventListener("orientationchange", lazyLoad);
+                }
+
+                // Function to check if an element is in viewport
+                function isInViewport(element) {
+                    const rect = element.getBoundingClientRect();
+                    return (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                }
+
+                // Pause GIFs when they are not in viewport
+                function pauseGifs() {
+                    document.querySelectorAll('.gif-container img').forEach(gif => {
+                        if (!isInViewport(gif)) {
+                            gif.style.pointerEvents = 'none';               
+                        }
+                    });
+                }
+
+                // Resume GIFs when they are in viewport
+                function resumeGifs() {
+                    document.querySelectorAll('.gif-container img').forEach(gif => {
+                        if (isInViewport(gif)) {
+                            gif.style.pointerEvents = 'auto'; 
+                        }
+                    });
+                }
+
+                // Event listeners for scrolling
+                window.addEventListener('scroll', () => {
+                    pauseGifs();
+                    resumeGifs();
+                });
+
+                // Initial check when page loads
+                document.addEventListener('DOMContentLoaded', () => {
+                    pauseGifs();
+                    resumeGifs();
+                });
+
+                const sotaButton = document.getElementById("sotaButton");
+                const ablationButton = document.getElementById("ablationButton");
+                const sotaContent = document.getElementById("sotaContent");
+                const ablationContent = document.getElementById("ablationContent");
+
+                sotaButton.addEventListener("click", function() {
+                    sotaContent.classList.remove("d-none");
+                    ablationContent.classList.add("d-none");
+                    sotaButton.classList.add("btn-primary");
+                    sotaButton.classList.remove("btn-secondary");
+                    ablationButton.classList.add("btn-secondary");
+                    ablationButton.classList.remove("btn-primary");
+                    restartGIFs("sotaGifs");
+                });
+
+                ablationButton.addEventListener("click", function() {
+                    sotaContent.classList.add("d-none");
+                    ablationContent.classList.remove("d-none");
+                    ablationButton.classList.add("btn-primary");
+                    ablationButton.classList.remove("btn-secondary");
+                    sotaButton.classList.add("btn-secondary");
+                    sotaButton.classList.remove("btn-primary");
+                    restartGIFs("ablationGifs");
+                });
+
+                function restartGIFs(containerId) {
+                    const gifsContainer = document.getElementById(containerId);
+                    const gifs = gifsContainer.querySelectorAll("img");
+                    gifs.forEach(function(gif) {
+                        gif.src = gif.src;
+                    });
+                }
+            });
+    </script>
+</body>
+</html>
